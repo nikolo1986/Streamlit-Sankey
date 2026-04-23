@@ -13,23 +13,23 @@ import streamlit as st
 import plotly.graph_objects as go
 import pandas as pd
 
-# ─────────────────────────────────────────────
+# ———————————————
 
 # PAGE CONFIG
 
-# ─────────────────────────────────────────────
+# ———————————————
 
 st.set_page_config(
-page_title=“CDAO → SOCOM CDR Priorities | Sankey”,
-page_icon=“🎯”,
+page_title=“CDAO -> SOCOM CDR Priorities | Sankey”,
+page_icon=””,
 layout=“wide”,
 )
 
-# ─────────────────────────────────────────────
+# ———————————————
 
-# CUSTOM CSS — DARK MILITARY AESTHETIC
+# CUSTOM CSS - DARK MILITARY AESTHETIC
 
-# ─────────────────────────────────────────────
+# ———————————————
 
 st.markdown(”””
 
@@ -134,35 +134,35 @@ st.markdown(”””
 
 “””, unsafe_allow_html=True)
 
-# ─────────────────────────────────────────────
+# ———————————————
 
 # CLASSIFICATION BANNER
 
-# ─────────────────────────────────────────────
+# ———————————————
 
 st.markdown(’<div class="class-banner">UNCLASSIFIED // FOR OFFICIAL USE ONLY</div>’, unsafe_allow_html=True)
 
-# ─────────────────────────────────────────────
+# ———————————————
 
 # HEADER
 
-# ─────────────────────────────────────────────
+# ———————————————
 
 st.markdown(”””
 
 <div class="top-banner">
-  <h1>⬡ CDAO USE CASE → SOCOM CDR PRIORITIES // FLOW ANALYSIS</h1>
+  <h1>[SOCOM] CDAO USE CASE -> SOCOM CDR PRIORITIES // FLOW ANALYSIS</h1>
   <p>USSOCOM J6 / CDAO | Data & Analytics Division | AY2025 | UNCLASSIFIED // FOUO</p>
 </div>
 """, unsafe_allow_html=True)
 
-# ─────────────────────────────────────────────
+# ———————————————
 
 # MOCK DATA DEFINITIONS
 
-# ─────────────────────────────────────────────
+# ———————————————
 
-# Node layers (left → right):
+# Node layers (left -> right):
 
 # Layer 0: CDAO Use Cases
 
@@ -217,13 +217,13 @@ cap_idx = {n: i + len(USE_CASES) for i, n in enumerate(CAPABILITIES)}
 loe_idx = {n: i + len(USE_CASES) + len(CAPABILITIES) for i, n in enumerate(LOE)}
 pri_idx = {n: i + len(USE_CASES) + len(CAPABILITIES) + len(LOE) for i, n in enumerate(CDR_PRIORITIES)}
 
-# ─────────────────────────────────────────────
+# ———————————————
 
 # FLOW DATA (mock weights = resource/effort units)
 
-# ─────────────────────────────────────────────
+# ———————————————
 
-# Use Case → Capability
+# Use Case -> Capability
 
 uc_to_cap = [
 # (use_case, capability, value)
@@ -246,11 +246,11 @@ uc_to_cap = [
 (“Cyber Anomaly\nDetection (CAD)”,        “Real-Time\nData Fusion”,          11),
 ]
 
-# Capability → LOE
+# Capability -> LOE
 
 cap_to_loe = [
 (“Machine Learning\nPipelines”,     “Warfighter\nReadiness”,    22),
-(“Machine Learning\nPipelines”,     “Modernize the\nForce”,     0),  # placeholder, resolved at LOE→Pri
+(“Machine Learning\nPipelines”,     “Modernize the\nForce”,     0),  # placeholder, resolved at LOE->Pri
 (“Geospatial\nIntelligence”,        “Information\nAdvantage”,   26),
 (“Geospatial\nIntelligence”,        “Global SOF\nNetwork”,      18),
 (“Predictive\nAnalytics”,           “Warfighter\nReadiness”,    16),
@@ -263,7 +263,7 @@ cap_to_loe = [
 (“Decision Support\nDashboards”,    “Global SOF\nNetwork”,      19),
 ]
 
-# LOE → CDR Priority
+# LOE -> CDR Priority
 
 loe_to_pri = [
 (“Warfighter\nReadiness”,   “Sustain Lethality &\nReadiness”,           30),
@@ -280,11 +280,11 @@ loe_to_pri = [
 
 cap_to_loe = [(a, b, v) for a, b, v in cap_to_loe if v > 0]
 
-# ─────────────────────────────────────────────
+# ———————————————
 
 # BUILD SANKEY ARRAYS
 
-# ─────────────────────────────────────────────
+# ———————————————
 
 sources, targets, values, link_labels = [], [], [], []
 
@@ -292,25 +292,25 @@ for uc, cap, val in uc_to_cap:
 sources.append(uc_idx[uc])
 targets.append(cap_idx[cap])
 values.append(val)
-link_labels.append(f”{uc.split(chr(10))[0]} → {cap.split(chr(10))[0]}: {val} units”)
+link_labels.append(f”{uc.split(chr(10))[0]} -> {cap.split(chr(10))[0]}: {val} units”)
 
 for cap, loe, val in cap_to_loe:
 sources.append(cap_idx[cap])
 targets.append(loe_idx[loe])
 values.append(val)
-link_labels.append(f”{cap.split(chr(10))[0]} → {loe.split(chr(10))[0]}: {val} units”)
+link_labels.append(f”{cap.split(chr(10))[0]} -> {loe.split(chr(10))[0]}: {val} units”)
 
 for loe, pri, val in loe_to_pri:
 sources.append(loe_idx[loe])
 targets.append(pri_idx[pri])
 values.append(val)
-link_labels.append(f”{loe.split(chr(10))[0]} → {pri.split(chr(10))[0]}: {val} units”)
+link_labels.append(f”{loe.split(chr(10))[0]} -> {pri.split(chr(10))[0]}: {val} units”)
 
-# ─────────────────────────────────────────────
+# ———————————————
 
 # NODE COLORS BY LAYER
 
-# ─────────────────────────────────────────────
+# ———————————————
 
 uc_color   = “rgba(79, 195, 247, 0.85)”    # steel blue
 cap_color  = “rgba(31, 138, 76, 0.85)”     # SOF green
@@ -335,11 +335,11 @@ link_colors.append(“rgba(31, 138, 76, 0.25)”)
 else:
 link_colors.append(“rgba(255, 167, 38, 0.25)”)
 
-# ─────────────────────────────────────────────
+# ———————————————
 
 # SIDEBAR CONTROLS
 
-# ─────────────────────────────────────────────
+# ———————————————
 
 with st.sidebar:
 st.markdown(’<div class="section-label">// Display Options</div>’, unsafe_allow_html=True)
@@ -353,10 +353,10 @@ st.markdown("---")
 st.markdown('<div class="section-label">// Legend</div>', unsafe_allow_html=True)
 st.markdown("""
 <div style='font-family: Rajdhani; font-size:0.82rem; line-height:1.8;'>
-  <span style='color:#4fc3f7'>■</span> CDAO Use Cases<br>
-  <span style='color:#1f8a4c'>■</span> Data & Analytics Capabilities<br>
-  <span style='color:#ffa726'>■</span> Lines of Effort<br>
-  <span style='color:#ef5350'>■</span> CDR Strategic Priorities
+  <span style='color:#4fc3f7'>[*]</span> CDAO Use Cases<br>
+  <span style='color:#1f8a4c'>[*]</span> Data & Analytics Capabilities<br>
+  <span style='color:#ffa726'>[*]</span> Lines of Effort<br>
+  <span style='color:#ef5350'>[*]</span> CDR Strategic Priorities
 </div>
 """, unsafe_allow_html=True)
 
@@ -364,11 +364,11 @@ st.markdown("---")
 st.markdown('<div style="font-family:Share Tech Mono; font-size:0.65rem; color:#4a6a7a; letter-spacing:0.12em;">UNCLASSIFIED // FOUO<br>NOT FOR PUBLIC RELEASE</div>', unsafe_allow_html=True)
 ```
 
-# ─────────────────────────────────────────────
+# ———————————————
 
 # METRICS ROW
 
-# ─────────────────────────────────────────────
+# ———————————————
 
 total_flow     = sum(v for _, _, v in loe_to_pri)
 n_use_cases    = len(USE_CASES)
@@ -386,11 +386,11 @@ st.markdown(f’<div class="metric-card"><div class="metric-val">{n_loe}</div><d
 with col4:
 st.markdown(f’<div class="metric-card"><div class="metric-val">{total_flow}</div><div class="metric-lbl">Total Effort Units Mapped</div></div>’, unsafe_allow_html=True)
 
-# ─────────────────────────────────────────────
+# ———————————————
 
 # SANKEY FIGURE
 
-# ─────────────────────────────────────────────
+# ———————————————
 
 fig = go.Figure(go.Sankey(
 arrangement=“snap”,
@@ -420,7 +420,7 @@ height=chart_h,
 margin=dict(l=20, r=20, t=60, b=20),
 title=dict(
 text=(
-“<b>CDAO USE CASE FLOW → SOCOM CDR STRATEGIC PRIORITIES</b><br>”
+“<b>CDAO USE CASE FLOW -> SOCOM CDR STRATEGIC PRIORITIES</b><br>”
 “<sup style='color:#8aabb8'>Resource/Effort Units | AY2025 Mock Data | UNCLASSIFIED // FOUO</sup>”
 ),
 font=dict(family=“Share Tech Mono, monospace”, size=14, color=”#4fc3f7”),
@@ -431,11 +431,11 @@ xanchor=“left”,
 
 st.plotly_chart(fig, use_container_width=True)
 
-# ─────────────────────────────────────────────
+# ———————————————
 
 # OPTIONAL FLOW DATA TABLE
 
-# ─────────────────────────────────────────────
+# ———————————————
 
 if show_table:
 st.markdown(’<div class="section-label" style="margin-top:24px;">// Raw Flow Data</div>’, unsafe_allow_html=True)
@@ -443,17 +443,17 @@ st.markdown(’<div class="section-label" style="margin-top:24px;">// Raw Flow D
 ```
 rows = []
 for uc, cap, val in uc_to_cap:
-    rows.append({"Layer": "Use Case → Capability",
+    rows.append({"Layer": "Use Case -> Capability",
                  "Source": uc.replace("\n", " "),
                  "Target": cap.replace("\n", " "),
                  "Effort Units": val})
 for cap, loe, val in cap_to_loe:
-    rows.append({"Layer": "Capability → LOE",
+    rows.append({"Layer": "Capability -> LOE",
                  "Source": cap.replace("\n", " "),
                  "Target": loe.replace("\n", " "),
                  "Effort Units": val})
 for loe, pri, val in loe_to_pri:
-    rows.append({"Layer": "LOE → CDR Priority",
+    rows.append({"Layer": "LOE -> CDR Priority",
                  "Source": loe.replace("\n", " "),
                  "Target": pri.replace("\n", " "),
                  "Effort Units": val})
@@ -470,11 +470,11 @@ st.dataframe(
 )
 ```
 
-# ─────────────────────────────────────────────
+# ———————————————
 
 # FOOTER
 
-# ─────────────────────────────────────────────
+# ———————————————
 
 st.markdown(”—”)
 st.markdown(
