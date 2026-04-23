@@ -1,5 +1,5 @@
 “””
-Sankey.py — CDAO Use Case → SOCOM CDR Priorities
+Sankey.py - CDAO Use Case -> SOCOM CDR Priorities
 Streamlit app with Plotly Sankey diagram (dark military aesthetic)
 
 Run with:
