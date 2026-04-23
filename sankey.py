@@ -130,6 +130,14 @@ node_pad   = st.slider(‘Node Padding’, 10, 40, 20)
 node_thick = st.slider(‘Node Thickness’, 10, 40, 22)
 chart_h    = st.slider(‘Chart Height px’, 500, 1000, 720)
 show_table = st.checkbox(‘Show Flow Data Table’, value=False)
+st.markdown(’—’)
+with open(**file**, ‘rb’) as _f:
+st.download_button(
+label=‘Download Sankey.py’,
+data=_f.read(),
+file_name=‘Sankey.py’,
+mime=‘text/x-python’,
+)
 
 total_flow = sum(v for _, _, v in loe_to_pri)
 c1, c2, c3, c4 = st.columns(4)
